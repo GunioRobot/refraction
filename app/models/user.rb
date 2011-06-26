@@ -10,6 +10,8 @@ class User
   
   field :roles, :type=>Array
   
+  has_many :tweets
+  
   
   def add_roles(roles)
     roles.uniq!
