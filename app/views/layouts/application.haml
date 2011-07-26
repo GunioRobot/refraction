@@ -9,6 +9,13 @@
   = javascript_include_tag :defaults
   = csrf_meta_tag 
   %body
+    #banner
+      - if user_signed_in?
+        = link_to(t('.logout'), destroy_user_session_path)
+        = link_to(t('.edit_registration'), edit_user_registration_path)
+      -else
+        = link_to(t('.login'), new_user_session_path)
+        
     %p.notice=notice
     %p.alert=alert
     %p.deney=@deney

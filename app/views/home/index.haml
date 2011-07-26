@@ -1,14 +1,15 @@
-- if user_signed_in?
-  = link_to('Logout', destroy_user_session_path)
--else
-  = link_to('Login', new_user_session_path)
 
 -if user_signed_in?
   =render 'tweets/form'
-
-- @tweets.each do |tweet|
-  .tweet
-    %p.content
-      =tweet.content
-    %p.author
-      =tweet.user
+#tweets
+  - @tweets.each do |tweet|
+    .tweet
+      .hd
+        =avatar_url(tweet.user)
+      .bd
+        .text
+          %span.username=link_to(tweet.user.name, user_url(tweet.user))+':'
+          =tweet.content
+        .ft
+          %span.timestamp=tweet.created_at
+        

@@ -1,0 +1,58 @@
+a {
+color: #4B8DC5;
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+body {
+font: 12px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+color: #505050;
+}
+
+.tweet {
+position: relative;
+left: 0;
+top: 0;
+overflow: hidden;
+_width: 630px;
+border-bottom: 1px solid #EFF1F2;
+padding: 15px 25px;
+min-height: 48px;
+height: auto!important;
+height: 48px;
+}
+
+#tweets .tweet .hd{
+position: absolute;
+top: 16px;
+}
+
+.tweet .bd {
+width: 480px;
+margin-bottom: 5px;
+overflow: hidden;
+margin-left: 70px;
+}
+
+.tweet .bd .text {
+font-size: 14px;
+color: #333;
+line-height: 19px;
+word-wrap: break-word;
+
+}
+.username a {
+font-size: 14px;
+font-weight: 800;
+color: black;
+}
+
+.ft {
+color: #999;
+}
+.timestamp {
+float: left;
+}

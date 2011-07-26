@@ -3,7 +3,16 @@
 
 en:
   tweet_saved: 'Tweet successfully saved'
+  layouts:
+    application:
+      logout: 'Logout'
+      login: 'Login'
+      edit_registration: 'Edit Registration'
   tweets:
     form:
-      submit: "Submit"
+      submit: 'Submit'
+  home:
+    index:
+      shomepage: '的主页'
+      
       
