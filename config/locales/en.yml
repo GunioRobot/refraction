@@ -11,6 +11,12 @@ en:
   tweets:
     form:
       submit: 'Submit'
+    show:
+      Comment: 'Comment'
+      Comments: 'Comments'
+  comments:
+    form:
+      submit: 'Sumit'
   home:
     index:
       shomepage: '的主页'

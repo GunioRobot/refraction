@@ -12,4 +12,12 @@
           =tweet.content
         .ft
           %span.timestamp=tweet.created_at
+        .clear-both
+        .reply_button
+          -comments_num=tweet.comments.count
+          -if comments_num>1
+            =link_to t('.Comments'), tweet_url(tweet)
+          -else
+            =link_to t('.Comment'), tweet_url(tweet)
+          ='('+comments_num.to_s+')'
         

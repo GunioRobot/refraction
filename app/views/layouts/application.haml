@@ -18,5 +18,17 @@
         
     %p.notice=notice
     %p.alert=alert
+    - if flash[:success]
+      .notification#success
+        %span.close x
+        %div= flash[:success]              
+    - if flash[:error]
+      .notification#error
+        %span.close x
+        %div= flash[:error]              
+    - if flash[:notice]
+      .notice.flash
+        = flash[:notice]
+        %span.close x
     %p.deney=@deney
     = yield

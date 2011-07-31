@@ -6,5 +6,6 @@ class ActiveSupport::TestCase
   
   
   
+  # Drop all columns after each test case.
 
 end

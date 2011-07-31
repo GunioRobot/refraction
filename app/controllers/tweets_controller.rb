@@ -8,4 +8,11 @@ class TweetsController < ApplicationController
       render 'home/index'
     end
   end
+  
+  def show
+    @tweet=Tweet.find(params[:id])
+    @comment=Comment.new
+    @comments=@tweet.comments.all.order_by([:created_at, :desc])
+    @comments_num=@tweet.comments.count
+  end
 end

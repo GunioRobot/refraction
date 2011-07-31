@@ -6,6 +6,6 @@ class Tweet
   field :title
   
   belongs_to :user
-  
+  references_many :comments  
   
 end

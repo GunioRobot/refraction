@@ -16,6 +16,7 @@ class User
   field :email
   
   has_many :tweets
+  references_many :comments
   
   validates_uniqueness_of :name, :email, :case_sensitive => false
   
