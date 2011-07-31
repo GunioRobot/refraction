@@ -1,0 +1,22 @@
+#tweet
+  =avatar_url(@tweet.user)
+  %span.username=link_to(@tweet.user.name, user_url(@tweet.user))
+  %span=@tweet.created_at
+  #text
+    =@tweet.content
+%hr
+=render 'comments/form'
+
+#comments
+  -if @comments_num>1
+    %h2=@comments_num.to_s+' '+ t('.Comments')
+  -else
+    %h2=@comments_num.to_s+' '+ t('.Comment')
+  -@comments.each do |comment|
+    %hr
+    .comment
+      =avatar_url(comment.user)
+      %span.username=link_to(comment.user.name, user_url(comment.user))
+      %span=comment.created_at
+      #text
+        =comment.content
