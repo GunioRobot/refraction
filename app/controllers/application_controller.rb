@@ -20,7 +20,11 @@ class ApplicationController < ActionController::Base
     else
       render :template => "/errors/unknown.html.erb", :status => status, :layout => "application"
     end
-  end  
+  end
+
+  def login_as(user)
+    self.current_user = user
+  end
   
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message

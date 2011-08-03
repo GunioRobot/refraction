@@ -5,8 +5,5 @@ class HomeController < ApplicationController
     @tweets=Tweet.all.desc(:created_at)
   end
   
-  
-  def test
-    authorize! :read, User, :message => "Unable to read this article."
-  end
+
 end

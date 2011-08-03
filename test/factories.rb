@@ -6,12 +6,19 @@ Factory.define :user do |user|
   user.password_confirmation 'password'
 end
 
-Factory.define :topic do |topic|
-  topic.title 'title'
-  topic.content 'content'
-  topic.association :user
+Factory.define :tweet do |tweet|
+  tweet.title 'title'
+  tweet.content 'content'
+  tweet.association :user
 end
 
+
+
+Factory.define :comment do |comment|
+  comment.content 'content'
+  comment.association :user
+  comment.association :tweet
+end
 =begin
 Factory.define :reply do |reply|
   reply.content 'content'

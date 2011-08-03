@@ -1,8 +1,13 @@
 require 'test_helper'
 
 class TweetTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert false
+  def setup
+    @user=Factory :user
   end
+
+  test 'only owner can delete' do
+    
+  end
+
+
 end

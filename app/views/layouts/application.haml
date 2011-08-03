@@ -10,6 +10,7 @@
   = csrf_meta_tag 
   %body
     #banner
+      =link_to t('.Home'), root_url
       - if user_signed_in?
         = link_to(t('.logout'), destroy_user_session_path)
         = link_to(t('.edit_registration'), edit_user_registration_path)

@@ -16,4 +16,17 @@ class CommentsController < ApplicationController
     end
     redirect_to tweet_url(@tweet)
   end
+
+  def destroy
+    @comment=Comment.find(params[:id])
+    render_403&&return unless @comment.user==current_user||@comment.tweet.user==current_user #only owner or tweet owner can delete
+    if @comment.destroy
+      flash[:success]=t('.Deleted successfully')
+    else
+      flash[:error]=t('.Failed, please try again')
+    end
+    redirect_to :back
+
+  end
+
 end

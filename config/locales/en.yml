@@ -8,17 +8,25 @@ en:
       logout: 'Logout'
       login: 'Login'
       edit_registration: 'Edit Registration'
+      Home: 'Home'
   tweets:
     form:
       submit: 'Submit'
     show:
       Comment: 'Comment'
       Comments: 'Comments'
+      Are you sure?: 'Are you sure?'
+      Delete: 'Delete'
   comments:
     form:
       submit: 'Sumit'
   home:
     index:
       shomepage: '的主页'
+      Are you sure?: 'Are you sure?'
+      Delete: 'Delete'
+  errors:
+    403:
+      Return: 'Return'
       
       
