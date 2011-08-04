@@ -3,6 +3,9 @@
 
 en:
   tweet_saved: 'Tweet successfully saved'
+  Deleted successfully: 'Deleted successfully'
+  
+  
   layouts:
     application:
       logout: 'Logout'

@@ -9,6 +9,7 @@ end
 Factory.define :tweet do |tweet|
   tweet.title 'title'
   tweet.content 'content'
+  tweet.closed true
   tweet.association :user
 end
 
