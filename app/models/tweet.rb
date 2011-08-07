@@ -4,12 +4,12 @@ class Tweet
   
   field :content
   field :title
-  field :closed, :type=>Boolean, :default=>true
+  field :closed, :type=>Boolean, :default=>false
   
   belongs_to :user
   references_many :comments
 
-  validates_presence_of :content, :user, :comment_open
+  validates_presence_of :content, :user
 
 
   def open?

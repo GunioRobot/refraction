@@ -20,19 +20,23 @@ class User
   
   validates_uniqueness_of :name, :email, :case_sensitive => false
   
-  def add_roles(roles)
+  def add_roles!(roles)
+    roles=roles.split
     roles.uniq!
+    self.roles=Array.new unless self.roles
     self.roles=self.roles+roles
     save
   end
   
-  def remove_roles(roles)
+  def remove_roles!(roles)
+    roles=roles.split
     self.roles=self.roles-roles
     save
   end
   
   def role?(role)
-    return roles.include?(role)
+    return self.roles.include?(role) if self.roles
+    return false
   end
   
   protected

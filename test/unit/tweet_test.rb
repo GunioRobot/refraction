@@ -6,8 +6,9 @@ class TweetTest < ActiveSupport::TestCase
   end
 
   test 'only owner can delete' do
-    
+    #TODO
   end
+  
 
 
 end

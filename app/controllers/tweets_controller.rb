@@ -1,4 +1,7 @@
 class TweetsController < ApplicationController
+  before_filter :permission, :only=>[:create, :edit, :upadte, :destroy]
+  
+  
   def create
     @tweet=Tweet.new(params[:tweet])
     @tweet.user=current_user
@@ -51,6 +54,11 @@ class TweetsController < ApplicationController
       flash[:error]=t('.Failed, please try again')
     end
     redirect_to :back
+  end
+  
+  
+  def permission
+    render_403 unless can?(:manage,@all)
   end
 
 end

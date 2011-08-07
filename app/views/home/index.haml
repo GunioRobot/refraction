@@ -1,5 +1,5 @@
 
--if user_signed_in?
+-if user_signed_in?&&can?(:manage,@all)
   =render 'tweets/form'
 #tweets
   - @tweets.each do |tweet|

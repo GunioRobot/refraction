@@ -11,7 +11,6 @@ class TweetsControllerTest < ActionController::TestCase
     @other_user=Factory.create(:user)
     @comment_owner=Factory.create(:user)
     @tweet=Factory(:tweet, :user=>@tweet_owner)
-
   end
 
   test 'others cannot delete a tweet' do  
@@ -62,6 +61,13 @@ class TweetsControllerTest < ActionController::TestCase
     assert_not_nil flash[:success]
   end
 
+  test "editor can see the submit form" do
+    #TODO
+  end
+  
+  test "others cannt see the submit form" do
+    #TODO
+  end
 
 
 
