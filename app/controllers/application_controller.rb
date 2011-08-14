@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
     self.current_user = user
   end
   
+  def admin_needed
+    render_403 unless can?(:manage,@all)
+  end
+  
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end

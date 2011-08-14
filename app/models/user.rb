@@ -22,15 +22,16 @@ class User
   
   def add_roles!(roles)
     roles=roles.split
-    roles.uniq!
     self.roles=Array.new unless self.roles
     self.roles=self.roles+roles
+    self.roles.uniq!
     save
   end
   
   def remove_roles!(roles)
     roles=roles.split
     self.roles=self.roles-roles
+    self.roles.uniq!
     save
   end
   

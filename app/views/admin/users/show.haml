@@ -1,0 +1,17 @@
+=@user.name
+%br
+Roles: 
+=@user.roles.join ', '
+%hr
+.admin.user.tweets
+  %h2='Tweets:'
+  -@tweets.each do |t|
+    .admin_stweet
+      =t.content
+  =link_to 
+%hr
+.admin.user.comments
+  %h2='Comments:'
+  -@comments.each do |c|
+    .admin_comment
+      =c.content

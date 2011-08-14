@@ -8,6 +8,7 @@ class TweetsControllerTest < ActionController::TestCase
     @request.env["devise.mapping"] = Devise.mappings[:user]
     @request.env["HTTP_REFERER"]='index_url'
     @tweet_owner=Factory.create(:user)
+    @tweet_owner.add_roles!('admin editor')
     @other_user=Factory.create(:user)
     @comment_owner=Factory.create(:user)
     @tweet=Factory(:tweet, :user=>@tweet_owner)
@@ -67,6 +68,20 @@ class TweetsControllerTest < ActionController::TestCase
   
   test "others cannt see the submit form" do
     #TODO
+  end
+  
+  test "non-permission user cannt post a tweet" do
+    sign_in @other_user
+    post :create
+    assert_response 403
+  end
+  
+  test "editor can post a tweet" do    
+    @other_user.add_roles!('editor')
+    sign_in @other_user
+    post :create,:tweet => {:content=>'abc'}
+    assert_response 302
+    #assert_redirected_to 'index_url'
   end
 
 

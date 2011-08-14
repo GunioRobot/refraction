@@ -12,6 +12,13 @@ Src2::Application.routes.draw do
   end
   
   resources :comments
+  
+  namespace :admin do
+    get '/' =>'dashboard#show', :as=>:dashboard
+    resources :users do
+      
+    end
+  end
 
   root :to => "home#index"
 end

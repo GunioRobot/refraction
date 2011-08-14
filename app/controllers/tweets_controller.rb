@@ -17,6 +17,7 @@ class TweetsController < ApplicationController
     @comment=Comment.new
     @comments=@tweet.comments.all.order_by([:created_at, :desc])
     @comments_num=@tweet.comments.count
+    
   end
 
   def edit
@@ -58,7 +59,9 @@ class TweetsController < ApplicationController
   
   
   def permission
-    render_403 unless can?(:manage,@all)
+    render_403 unless can?(:manage, Tweet)
   end
+  
+
 
 end
