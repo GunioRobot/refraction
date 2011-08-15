@@ -9,7 +9,8 @@ Roles:
   %h2='Tweets:'
   -@tweets.each do |t|
     .admin_stweet
-      =t.content
+      =link_to t.content, tweet_url(t)
+      =t.created_at
   =link_to ('All'), tweets_admin_user_url(@user)
 %hr
 .admin.user.comments
@@ -17,4 +18,5 @@ Roles:
   -@comments.each do |c|
     .admin_comment
       =c.content
+      =c.created_at
   =link_to ('All'), comments_admin_user_url(@user)

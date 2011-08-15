@@ -6,9 +6,11 @@
 -@users.each do |user|
   %div
     =link_to user.name, admin_user_url(user)
+    =user.get_roles
     %br
     =user.tweets.count.to_s+' Tweets'
     =user.comments.count.to_s+' Comments'
+    =user.created_at
   %hr
 
 %p=will_paginate @users

@@ -40,6 +40,12 @@ class User
     return false
   end
   
+  def get_roles
+    self.roles.join(', ')
+  end
+
+
+  
   protected
 
 end

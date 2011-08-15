@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
   
   def create
     @tweet=Tweet.new(params[:tweet])
-    @tweet.user=current_user
+    @tweet.user=current_user.order_by([[:created_at,:desc]])
     if @tweet.save
       redirect_to root_url, :notice=>t(:tweet_saved)      
     else

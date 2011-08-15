@@ -1,3 +1,5 @@
+=render 'admin/nav'
+
 %h2
   =@user.name+"'s tweets"
 -@tweets.each do |t|
@@ -5,4 +7,5 @@
     =t.content
     %br
     =link_to t('.Delete'), admin_tweet_url(t),:method=>:delete, :confirm=>'Are you sure?'
+    =t.created_at
     %hr

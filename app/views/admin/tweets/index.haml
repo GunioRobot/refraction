@@ -9,4 +9,5 @@
     %br    
     =link_to t.user.name, admin_user_url(t.user)
     =link_to t('.Delete'), admin_tweet_url(t),:method=>:delete, :confirm=>'Are you sure?'
+    =t.created_at
     %hr
