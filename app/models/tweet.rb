@@ -11,6 +11,7 @@ class Tweet
 
   validates_presence_of :content, :user
 
+  before_destroy :delete_comments
 
   def open?
     !self.closed
@@ -29,6 +30,8 @@ class Tweet
     self.close=false
   end
   
-
+  def delete_comments
+    self.comments.destroy
+  end
   
 end

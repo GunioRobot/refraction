@@ -8,6 +8,15 @@ class TweetTest < ActiveSupport::TestCase
   test 'only owner can delete' do
     #TODO
   end
+
+  test 'delete all comments when the tweet deleted' do
+    @tweet=Factory :tweet
+    @comment1=Factory :comment, :tweet=>@tweet
+    @comment2=Factory :comment, :tweet=>@tweet
+    assert @tweet.comments.all.count==2
+    @tweet.destroy
+    assert Comment.all.count==0
+  end
   
 
 

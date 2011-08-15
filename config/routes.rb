@@ -16,8 +16,15 @@ Src2::Application.routes.draw do
   namespace :admin do
     get '/' =>'dashboard#show', :as=>:dashboard
     resources :users do
-      
+      member do
+        get 'tweets'
+        get 'comments'
+      end
     end
+    
+    resources :tweets
+    resources :comments
+    
   end
 
   root :to => "home#index"

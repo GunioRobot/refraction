@@ -1,0 +1,12 @@
+=render 'admin/nav'
+
+%h2
+  =@user.name+"'s comments"
+-@comments.each do |t|
+  .admin_stweet
+    =t.content
+    >>>
+    =link_to t.tweet.content, tweet_url(t.tweet)
+    %br
+    =link_to t('.Delete'), admin_comment_url(t),:method=>:delete, :confirm=>'Are you sure?'
+    %hr

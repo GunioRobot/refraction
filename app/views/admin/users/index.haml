@@ -1,4 +1,14 @@
+=render 'admin/nav'
+
+%h2
+  ='All Users'
+  =@count
 -@users.each do |user|
-  =link_to user.name, admin_user_url(user)
+  %div
+    =link_to user.name, admin_user_url(user)
+    %br
+    =user.tweets.count.to_s+' Tweets'
+    =user.comments.count.to_s+' Comments'
+  %hr
 
 %p=will_paginate @users
