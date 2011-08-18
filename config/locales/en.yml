@@ -32,4 +32,18 @@ en:
     403:
       Return: 'Return'
       
-      
+  admin:
+    nav:
+      dashboard: Dashboard
+      tweets: Tweets
+      comments: Comments
+      users: Users
+    users:
+      show:
+        Add roles: 'Add roles'
+        Remove roles: 'Remove roles'
+        Reset roles: 'Reset roles'
+        All: 'All'
+      roles:
+        Are you sure?: 'Are You Sure?'
+        A: 'a'

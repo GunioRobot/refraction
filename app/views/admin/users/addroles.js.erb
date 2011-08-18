@@ -1,0 +1,2 @@
+$('#display_roles').html("<%=escape_javascript(render(:partial=>'roles',:locals=>{:roles=>@user.roles, :user=>@user}))%>");
+$('input.[type="text"]').val('');

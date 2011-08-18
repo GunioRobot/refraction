@@ -1,0 +1,2 @@
+-roles.each do |r|
+  =raw(r+link_to('x',removerole_admin_user_url(user,:role=>r),:method=>:delete,:confirm=>t('.Are you sure?'),:remote=>true))

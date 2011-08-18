@@ -1,5 +1,6 @@
 class Admin::CommentsController < ApplicationController
-
+  before_filter :admin_needed
+  
   def index
     @comments=Comment.all.order_by([:created_at, :desc]).paginate :page=>params[:page],:per_page=>20
     @count=Comment.count

@@ -34,6 +34,11 @@ class User
     self.roles.uniq!
     save
   end
+
+  def reset_roles!(roles)
+    self.roles=roles.split.uniq if roles
+    save
+  end
   
   def role?(role)
     return self.roles.include?(role) if self.roles
@@ -41,8 +46,11 @@ class User
   end
   
   def get_roles
-    self.roles.join(', ')
+    return self.roles.join(', ') if self.roles
+    return ''
   end
+
+  
 
 
   

@@ -19,6 +19,10 @@ Src2::Application.routes.draw do
       member do
         get 'tweets'
         get 'comments'
+        post 'addroles'
+        post 'removeroles'
+        post 'resetroles'
+        delete 'removerole'
       end
     end
     

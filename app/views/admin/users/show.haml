@@ -1,9 +1,19 @@
 =render 'admin/nav'
 
-=@user.name
+%h1=@user.name
 %br
-Roles: 
-=@user.roles.join ', '
+Roles:
+%span#display_roles=render(:partial=>'roles',:locals=>{:roles=>@user.roles, :user=>@user})
+
+-form_tag({:action => "addroles"}, :remote => true) do
+  =text_field_tag(:add_roles)
+  =submit_tag t('.Add roles')
+-form_tag({:action=>'removeroles'},:remote=>true) do
+  =text_field_tag(:remove_roles)
+  =submit_tag t('.Remove roles')
+-form_tag({:action=>'resetroles'},:remote=>true) do
+  =text_field_tag(:reset_roles)
+  =submit_tag t('.Reset roles')
 %hr
 .admin.user.tweets
   %h2='Tweets:'
@@ -11,12 +21,15 @@ Roles:
     .admin_stweet
       =link_to t.content, tweet_url(t)
       =t.created_at
-  =link_to ('All'), tweets_admin_user_url(@user)
+  =link_to t('.All'), tweets_admin_user_url(@user)
 %hr
 .admin.user.comments
   %h2='Comments:'
   -@comments.each do |c|
     .admin_comment
       =c.content
+      >>> on
+      =link_to c.tweet.content, tweet_url(c.tweet)
       =c.created_at
-  =link_to ('All'), comments_admin_user_url(@user)
+  =link_to t('.All'), comments_admin_user_url(@user)
+
