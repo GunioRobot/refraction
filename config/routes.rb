@@ -11,7 +11,7 @@ Src2::Application.routes.draw do
     
   end
   
-  resources :comments
+  resources :comments, :except=>[:show]
   
   namespace :admin do
     get '/' =>'dashboard#show', :as=>:dashboard
@@ -26,8 +26,9 @@ Src2::Application.routes.draw do
       end
     end
     
-    resources :tweets
-    resources :comments
+    resources :tweets, :only=>[:index, :destroy]
+    resources :comments, :only=>[:index, :destroy]
+    resources :logs, :only=>[:index]
     
   end
 

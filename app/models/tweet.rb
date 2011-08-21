@@ -10,6 +10,8 @@ class Tweet
   references_many :comments
 
   validates_presence_of :content, :user
+  
+  attr_accessible :content
 
   before_destroy :delete_comments
 

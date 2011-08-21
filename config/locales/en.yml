@@ -38,6 +38,7 @@ en:
       tweets: Tweets
       comments: Comments
       users: Users
+      logs: Logs
     users:
       show:
         Add roles: 'Add roles'

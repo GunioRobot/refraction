@@ -8,6 +8,6 @@ class Comment
   field :content
   
   validates_presence_of :content, :user, :tweet
-  
+  attr_accessible :content
   
 end

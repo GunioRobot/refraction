@@ -1,0 +1,13 @@
+=render 'admin/nav'
+
+%h1 Logs
+
+-@logs.each do |l|
+  .log
+    =link_to l.from.name, admin_user_url(l.from)
+    >>>
+    =l.action
+    >>>
+    =link_to l.to.name, admin_user_url(l.to)
+    >>>
+    =l.created_at

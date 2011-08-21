@@ -14,11 +14,37 @@ class User
   field :roles, :type=>Array
   field :name
   field :email
+  field :super, :type=>Boolean, :default=>0
+  field :blocked, :type=>Boolean, :default=>0
   
   has_many :tweets
   references_many :comments
   
   validates_uniqueness_of :name, :email, :case_sensitive => false
+  before_save :before_save
+  
+  def before_save
+    add_roles!('admin') if super?&&!role?('admin')
+  end
+  
+  def change_block!
+    self.blocked=!self.blocked
+    save
+  end
+  
+  def blocked?
+    self.blocked
+  end
+  
+  def set_super!
+    self.super=true
+    add_roles!('admin')
+    save
+  end
+  
+  def super?
+    self.super
+  end
   
   def add_roles!(roles)
     roles=roles.split
@@ -30,7 +56,7 @@ class User
   
   def remove_roles!(roles)
     roles=roles.split
-    self.roles=self.roles-roles
+    self.roles=self.roles-roles    
     self.roles.uniq!
     save
   end

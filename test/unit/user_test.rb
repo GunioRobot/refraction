@@ -25,4 +25,13 @@ class UserTest < ActiveSupport::TestCase
     assert !@user.role?('c')
   end
   
+  test 'super user' do
+    @user.set_super!
+    assert @user.super?
+    @user.remove_roles!('admin')
+    assert @user.role?('admin')
+    @user.reset_roles!('a')
+    assert @user.role?('admin')
+  end
+  
 end
