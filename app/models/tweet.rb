@@ -8,6 +8,7 @@ class Tweet
   
   belongs_to :user
   references_many :comments
+  has_one :retweet, :class_name=>'Tweet'
 
   validates_presence_of :content, :user
   

@@ -25,8 +25,13 @@ class TweetsControllerTest < ActionController::TestCase
   end
   
   test 'owner can delete a tweet' do    
-    @tweet=Factory(:tweet, :user=>@tweet_owner)
+    #@tweet=Factory(:tweet, :user=>@tweet_owner)
+    puts @tweet_owner.name
+    puts @tweet.user.name
     sign_in @tweet_owner
+    assert @tweet_owner==@tweet.user
+    assert @tweet_owner.role?('admin')
+    assert @tweet_owner.role?('editor')
     assert delete :destroy, :id=>@tweet.id
     assert_redirected_to 'index_url'
     assert_not_nil flash[:success]
@@ -41,6 +46,10 @@ class TweetsControllerTest < ActionController::TestCase
     sign_in @other_user
     get :edit, :id=>@tweet.id
     assert_response 403
+  end
+  
+  test "test show" do
+    #get :show, :id=>@tweet.id
   end
 
   test "others cannot edit tweet" do

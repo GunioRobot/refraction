@@ -13,6 +13,7 @@ class TweetsController < ApplicationController
   end
   
   def show
+    #puts 'abc'
     @tweet=Tweet.find(params[:id])
     @comment=Comment.new
     @comments=@tweet.comments.all.order_by([:created_at, :desc])
@@ -48,6 +49,9 @@ class TweetsController < ApplicationController
 
   def destroy
     @tweet=Tweet.find(params[:id])
+    puts @tweet.user.name
+    puts current_user.name
+    puts @tweet.user==current_user
     render_403&&return unless @tweet.user==current_user
     if @tweet.destroy
       flash[:success]=t('.Deleted successfully')      
