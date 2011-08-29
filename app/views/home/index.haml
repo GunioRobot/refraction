@@ -21,6 +21,7 @@
             =link_to t('.Comment'), tweet_url(tweet)
           ='('+comments_num.to_s+')'
           -if current_user==tweet.user
-            =link_to t('.Delete'), tweet_path(tweet), :confirm => t(".Are you sure?"), :method=>:delete
+            =link_to t('.Delete'), tweet_path(tweet), :confirm => t(".Are you sure?")
+
             
         

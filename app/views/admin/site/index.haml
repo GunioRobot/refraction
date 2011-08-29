@@ -1,0 +1,29 @@
+=render 'admin/nav'
+%h1=t('.site config')
+
+=form_for(@site, :url=>{:controller=>'admin/site', :action=>'update_site'}) do |f|
+  - if !f.object.errors.blank?
+    = render :partial => 'share/error_messages', :locals => {:object => f.object}
+  .clearfix
+    =f.label :site_name
+    .input=f.text_field(:site_name, :class=>'xxlarge', :size => "24x6")
+  .clearfix
+    =f.label :site_description
+    .input=f.text_area(:site_description, :class=>'xxlarge', :size => "24x6")
+  .actions=f.submit(t('.update'),:class=>"btn primary")
+
+%h5
+  Last generated time:
+  =@site.key_created_at
+.clearfix
+  %label{:for=>'public_key_area'}=t('.public key')
+  .input
+    %textarea.xxlarge#public_key_area{:readonly=>true, :clos=>"30", :rows=>"10"}
+      =@site.public_key
+.clearfix
+  %label{:for=>'private_key_area'}=t('.private key')
+  .input
+    %textarea.xxlarge#private_key_area{:readonly=>true, :clos=>"30", :rows=>"10"}
+      =@site.private_key
+
+.actions=link_to t('re-generate key pairs'), admin_regenerate_keys_url,:class=>"btn small danger", :confirm=>t('.dangerous') ,:remote=>true

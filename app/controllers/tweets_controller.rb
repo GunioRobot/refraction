@@ -6,6 +6,7 @@ class TweetsController < ApplicationController
     @tweet=Tweet.new(params[:tweet])
     @tweet.user=current_user
     if @tweet.save
+      #flash[:success]=t(:tweet_saved)      
       redirect_to root_url, :notice=>t(:tweet_saved)      
     else
       render 'home/index'
@@ -65,6 +66,14 @@ class TweetsController < ApplicationController
   def permission
     render_403 unless can?(:manage, Tweet)
   end
+
+  def index
+    @tweets=Tweet.all
+    respond_to do |format|
+      format.xml {render :xml=> @tweets}
+    end
+  end
+ 
   
 
 

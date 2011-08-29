@@ -51,7 +51,7 @@ class Admin::UsersController < ApplicationController
     roles=params[:reset_roles]
     @user=User.find(params[:id])
     @user.reset_roles!(roles)
-    Log.new(:from=>current_user,:action=>'reset to roles'+roles, :to=>@user).save
+    Log.new(:from=>current_user,:action=>'reset to roles '+roles, :to=>@user).save
     respond_to do |format|
       format.html {redirect_to admin_user_url(@user)}
       format.js { render 'addroles', :layout=>false }
@@ -62,7 +62,7 @@ class Admin::UsersController < ApplicationController
     role=params[:role]
     @user=User.find(params[:id])
     @user.remove_roles!(role)
-    Log.new(:from=>current_user,:action=>'removed role'+roles, :to=>@user).save
+    Log.new(:from=>current_user,:action=>'removed role '+role, :to=>@user).save
     respond_to do |format|
       format.html {redirect_to admin_user_url(@user)}
       format.js {render 'addroles', :layout=>false }

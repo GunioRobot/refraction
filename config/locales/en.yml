@@ -4,7 +4,7 @@
 en:
   tweet_saved: 'Tweet successfully saved'
   Deleted successfully: 'Deleted successfully'
-  
+  re-generate key pairs: 'Re-generate key pairs'  
   
   layouts:
     application:
@@ -39,6 +39,7 @@ en:
       comments: Comments
       users: Users
       logs: Logs
+      site config: 'Site Config'
     users:
       show:
         Add roles: 'Add roles'
@@ -48,3 +49,11 @@ en:
       roles:
         Are you sure?: 'Are You Sure?'
         A: 'a'
+    site:
+      index:
+        update: 'Update'
+        site config: 'Site Config'
+        public key: 'Public Key'
+        private key: 'Private Key'
+        dangerous: 'Dangerous, you will no longer receive or send messages to other sites'
+        

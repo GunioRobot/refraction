@@ -1,6 +1,7 @@
 class Tweet
   include Mongoid::Document
   include Mongoid::Timestamps
+  include HTTParty
   
   field :content
   field :title
@@ -35,6 +36,12 @@ class Tweet
   
   def delete_comments
     self.comments.destroy
+  end
+
+  #########
+
+  def self.get_all_stores
+    get("http://0.0.0.0:3000/tweets.xml")
   end
   
 end
