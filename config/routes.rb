@@ -29,12 +29,16 @@ Src2::Application.routes.draw do
     resources :tweets, :only=>[:index, :destroy]
     resources :comments, :only=>[:index, :destroy]
     resources :logs, :only=>[:index]
+    resources :sites
+    
     get 'site_config'=>'site#index', :as=>:site_config
     post 'site_config/update'=>'site#update_site'
     put 'site_config/update'=>'site#update_site'
     get 'site_config/regenerate_keys' => 'site#regenerate_keys', :as=>:regenerate_keys
     
   end
+  
+  post 'circle'=>'sites#circle'
 
   root :to => "home#index"
 end

@@ -1,6 +1,7 @@
 class Site
   include Mongoid::Document
   include Mongoid::Timestamps
+  
 
   field :public_key
   field :private_key
@@ -9,12 +10,17 @@ class Site
   field :site_name
   field :this_site, :type=>Boolean
   field :site_description
-  field :circle, :type=>Integer #0: in my circle, 1: circled me, 2: two directions
+  field :circle
+  field :remarks
   
   before_save :before_save
   
   def before_save
     key_created_at=updated_at if public_key_changed?||private_key_changed?
+  end
+
+  def to_hash
+    {:public_key=>public_key, :hashed_public_key=>hashed_public_key,:site_name=>site_name, :site_description=>site_description}
   end
 
 end

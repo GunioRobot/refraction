@@ -1,3 +1,5 @@
+body{padding-top: 40px;}
+
 a {
 color: #4B8DC5;
 text-decoration: none;
@@ -9,10 +11,7 @@ text-decoration: underline;
 
 a.close{cursor:pointer;}
 
-body {
-font: 12px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
-color: #505050;
-}
+
 
 .tweet {
 position: relative;

@@ -9,16 +9,21 @@
   = javascript_include_tag :defaults
   = csrf_meta_tag 
   %body
-    #banner
-      - if user_signed_in?
-        Welcom 
-        =current_user.name
-      =link_to t('.Home'), root_url
-      - if user_signed_in?
-        = link_to(t('.logout'), destroy_user_session_path)
-        = link_to(t('.edit_registration'), edit_user_registration_path)
-      -else
-        = link_to(t('.login'), new_user_session_path)
+    .topbar
+      .fill
+        .container
+          - if user_signed_in?
+            %h3
+              %a 
+                Welcom
+                =current_user.name
+          %ul
+            %li=link_to t('.Home'), root_url
+            - if user_signed_in?
+              %li= link_to(t('.logout'), destroy_user_session_path)
+              %li= link_to(t('.edit_registration'), edit_user_registration_path)
+            -else
+              %li= link_to(t('.login'), new_user_session_path)
     %p.alert=alert
     - if flash[:success]
       .alert-message.success

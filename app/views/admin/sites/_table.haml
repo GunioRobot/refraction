@@ -1,0 +1,16 @@
+%table
+  %tr
+    %th=t('.hash')
+    %th=t('.site name')
+    %th=t('.site description')
+    %th=t('.relation')
+    %th=t('.remarks')
+    %th=t('.added at')
+  -@sites.each do |s|
+    %tr
+      %td=s.hashed_public_key
+      %td=s.site_name
+      %td=s.site_description
+      %td=s.circle
+      %td=s.remarks
+      %td=s.created_at

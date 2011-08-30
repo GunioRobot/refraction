@@ -8,6 +8,7 @@
     >>>
     =l.action
     >>>
-    =link_to l.to.name, admin_user_url(l.to)
-    >>>
+    -if(l.to)
+      =link_to l.to.name, admin_user_url(l.to)
+      >>>
     =l.created_at

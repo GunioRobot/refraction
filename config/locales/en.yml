@@ -58,4 +58,15 @@ en:
         private key: 'Private Key'
         dangerous: 'Dangerous, you will no longer receive or send messages to other sites'
         hashed public key: 'Hashed Public Key'
+    sites:
+      index:
+        circle site: 'Circle a site'
+      table:
+        added at: 'Added At'
+        hash: 'Hash Value'
+        site name: 'Site Name'
+        site description: 'Site Description'
+        add a site: 'Circle a site'
+        remarks: 'Remarks'
+        
         
