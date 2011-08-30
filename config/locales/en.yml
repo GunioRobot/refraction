@@ -68,5 +68,10 @@ en:
         site description: 'Site Description'
         add a site: 'Circle a site'
         remarks: 'Remarks'
+      nav:
+        sites in your circles: 'Sites in your circles'
+        all: 'All sites'
+        sites who've added you: "Sites who've added you"
+        sites and you added each other: 'Sites and you added each other'
         
         

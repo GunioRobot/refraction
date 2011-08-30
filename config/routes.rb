@@ -29,7 +29,13 @@ Src2::Application.routes.draw do
     resources :tweets, :only=>[:index, :destroy]
     resources :comments, :only=>[:index, :destroy]
     resources :logs, :only=>[:index]
-    resources :sites
+    resources :sites do
+      collection do
+        get 'circled_you', :as=>'circled_you'
+        get 'you_circled', :as=>'you_circled'
+        get 'circled_each_other', :as=>'circled_each_other'
+      end
+    end
     
     get 'site_config'=>'site#index', :as=>:site_config
     post 'site_config/update'=>'site#update_site'

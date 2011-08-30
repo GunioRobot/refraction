@@ -1,0 +1,7 @@
+%h1=t('.sites manage')
+
+%ul.tabs
+  %li{:class => (action_name == 'index') ? 'active' : nil}=link_to t('.all'),admin_sites_url
+  %li{:class => (action_name == 'you_circled') ? 'active' : nil}=link_to t('.sites in your circles'),you_circled_admin_sites_url
+  %li{:class => (action_name == 'circled_you') ? 'active' : nil}=link_to t('.sites who\'ve added you'),circled_you_admin_sites_url
+  %li{:class => (action_name == 'circled_each_other') ? 'active' : nil}=link_to t('.sites and you added each other'),circled_each_other_admin_sites_url

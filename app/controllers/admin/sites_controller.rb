@@ -5,6 +5,21 @@ class Admin::SitesController < ApplicationController
   def index
     @sites=Site.where(:this_site.ne=>true).order_by([[:created_at, :desc]])
   end
+  
+  def circled_you
+    @sites=Site.where(circle: 'circled me').order_by([[:created_at, :desc]])
+    render 'index'
+  end
+  
+  def you_circled
+    @sites=Site.where(circle: 'I circled').order_by([[:created_at, :desc]])
+    render 'index'
+  end
+  
+  def circled_each_other
+    @sites=Site.where(circle: 'circled each other').order_by([[:created_at, :desc]])
+    render 'index'
+  end
 
   def create
     @our_site=Site.where(this_site: true).first #our site info
