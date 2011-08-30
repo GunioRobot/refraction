@@ -4,6 +4,7 @@ class Site
 
   field :public_key
   field :private_key
+  field :hashed_public_key
   field :key_created_at
   field :site_name
   field :this_site, :type=>Boolean

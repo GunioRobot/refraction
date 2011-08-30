@@ -7,6 +7,8 @@ a:hover {
 text-decoration: underline;
 }
 
+a.close{cursor:pointer;}
+
 body {
 font: 12px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
 color: #505050;
@@ -55,28 +57,6 @@ color: #999;
 }
 .timestamp {
 float: left;
-}
-
-
-
-
-.notice.flash {
-  background: #FFF0A8;
-  font-size: 13px;
-  font-weight: bold;
-  padding: 0 15px 1px;
-}
-
-.success.flash{
-  background-color: #109618;
-  padding: 1px 1px 1px 3px;
-  overflow: hidden;
-  white-space: nowrap;
-  color: white;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  font-size: 12px;
-  line-height: 14px;
 }
 
 .error.flash{

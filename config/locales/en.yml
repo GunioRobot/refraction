@@ -5,6 +5,7 @@ en:
   tweet_saved: 'Tweet successfully saved'
   Deleted successfully: 'Deleted successfully'
   re-generate key pairs: 'Re-generate key pairs'  
+  updated successfully: 'updated successfully'
   
   layouts:
     application:
@@ -56,4 +57,5 @@ en:
         public key: 'Public Key'
         private key: 'Private Key'
         dangerous: 'Dangerous, you will no longer receive or send messages to other sites'
+        hashed public key: 'Hashed Public Key'
         

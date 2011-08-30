@@ -16,14 +16,18 @@
   Last generated time:
   =@site.key_created_at
 .clearfix
+  %label{:for=>'hashed_public_key_area'}=t('.hashed public key')
+  .input
+    %span.uneditable-input#hashed_public_key_area{:style=>'width:250px;'}=@site.hashed_public_key
+.clearfix
   %label{:for=>'public_key_area'}=t('.public key')
   .input
-    %textarea.xxlarge#public_key_area{:readonly=>true, :clos=>"30", :rows=>"10"}
+    %textarea.xxlarge#public_key_area{:readonly=>true, :clos=>"30", :rows=>"10", :style=>'width:560px;'}
       =@site.public_key
 .clearfix
   %label{:for=>'private_key_area'}=t('.private key')
   .input
-    %textarea.xxlarge#private_key_area{:readonly=>true, :clos=>"30", :rows=>"10"}
+    %textarea.xxlarge#private_key_area{:readonly=>true, :clos=>"30", :rows=>"10", :style=>'width:560px;'}
       =@site.private_key
 
 .actions=link_to t('re-generate key pairs'), admin_regenerate_keys_url,:class=>"btn small danger", :confirm=>t('.dangerous') ,:remote=>true

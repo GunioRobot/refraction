@@ -22,15 +22,15 @@
     %p.alert=alert
     - if flash[:success]
       .alert-message.success
-        %span.close x
+        %a.close x
         %p= flash[:success]
     - if flash[:error]
       .alert-message.error
-        %span.close x
+        %a.close x
         %p= flash[:error]
     - if flash[:notice]
       .alert-message.warning
+        %a.close x
         %p= flash[:notice]
-        %span.close x
     %p.deney=@deney
     = yield
