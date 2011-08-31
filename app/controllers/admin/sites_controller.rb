@@ -3,7 +3,7 @@ class Admin::SitesController < ApplicationController
   include HTTParty
   
   def index
-    @sites=Site.where(:this_site.ne=>true).order_by([[:created_at, :desc]])
+    @sites=Site.order_by([[:created_at, :desc]])
   end
   
   def circled_you
@@ -35,7 +35,8 @@ class Admin::SitesController < ApplicationController
       @site.save
     else
       @site=Site.new(:site_name=>@r['site_name'],:site_description=>@r['site_description'],
-        :public_key=>@r['public_key'], :hashed_public_key=>@r['hashed_public_key'])
+        :public_key=>@r['public_key'], :hashed_public_key=>@r['hashed_public_key'],
+        :base_uri=>@r['base_uri'])
       @site.circle='I circled'
       @site.save
     end

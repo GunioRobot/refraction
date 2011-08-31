@@ -6,6 +6,10 @@ class Admin::SiteController < ApplicationController
 
   def index
     @site=Site.new({'this_site'=>true}) unless @site=Site.where(this_site: true).first
+    unless @site.base_uri
+      @site.base_uri=request.url.sub(request.fullpath, '')
+      @site.save
+    end
     
     unless(@site.public_key&&@site.private_key)
       rsa = OpenSSL::PKey::RSA.new(2048)
@@ -13,6 +17,8 @@ class Admin::SiteController < ApplicationController
       @site.hashed_public_key=Digest::MD5.hexdigest(@site.public_key)
       @site.save
     end
+    
+    
   end
   
   def update_site

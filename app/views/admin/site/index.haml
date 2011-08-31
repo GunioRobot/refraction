@@ -15,6 +15,11 @@
 %h5
   Last generated time:
   =@site.key_created_at
+
+.clearfix
+  %label{:for=>'base_uri'}=t('.base uri')
+  .input
+    %span.uneditable-input#base_uri{:style=>'width:250px;'}=@site.base_uri
 .clearfix
   %label{:for=>'hashed_public_key_area'}=t('.hashed public key')
   .input

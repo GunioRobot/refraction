@@ -15,7 +15,8 @@ class SitesController < ApplicationController
       @site.save
     else
       @site=Site.new(:public_key=>params[:public_key],:site_name=>params[:site_name],
-        :site_description=>params[:site_description],:hashed_public_key=>params[:hashed_public_key])
+        :site_description=>params[:site_description],:hashed_public_key=>params[:hashed_public_key],
+        :base_uri=>params[:base_uri])
       render_403 unless @site.hashed_public_key==Digest::MD5.hexdigest(@site.public_key)
       @site.circle='circled me'
       @site.save

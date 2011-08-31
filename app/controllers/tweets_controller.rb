@@ -1,12 +1,15 @@
 class TweetsController < ApplicationController
   before_filter :permission, :only=>[:create, :edit, :upadte, :destroy]
-  
+  include HTTParty
   
   def create
     @tweet=Tweet.new(params[:tweet])
     @tweet.user=current_user
     if @tweet.save
-      #flash[:success]=t(:tweet_saved)      
+           
+      
+      
+      
       redirect_to root_url, :notice=>t(:tweet_saved)      
     else
       render 'home/index'

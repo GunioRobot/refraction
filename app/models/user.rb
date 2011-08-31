@@ -24,6 +24,7 @@ class User
   before_save :before_save
   
   def before_save
+    self.super=true unless self.first
     add_roles!('admin') if super?&&!role?('admin')
   end
   

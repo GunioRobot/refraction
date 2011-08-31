@@ -10,6 +10,7 @@ class Site
   field :site_name
   field :this_site, :type=>Boolean
   field :site_description
+  field :base_uri
   field :circle
   field :remarks
   
@@ -20,7 +21,9 @@ class Site
   end
 
   def to_hash
-    {:public_key=>public_key, :hashed_public_key=>hashed_public_key,:site_name=>site_name, :site_description=>site_description}
+    {:public_key=>public_key, :hashed_public_key=>hashed_public_key,:site_name=>site_name, :site_description=>site_description,
+      :site_uri=>base_uri
+    }
   end
 
 end

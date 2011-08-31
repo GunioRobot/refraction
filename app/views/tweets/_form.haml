@@ -1,7 +1,8 @@
 =form_for(@tweet) do |f|
   - if !f.object.errors.blank?
     = render :partial => 'share/error_messages', :locals => {:object => f.object}
-  #editor-button-bar
-  =f.text_area(:content, :size => "70x6") 
-  %br
-  = f.submit t('.submit'),:class=>'button'
+  .clearfix
+    
+    =f.text_area(:content, :size => "70x6", :class=>'xxlarge') 
+    %br
+  = f.submit t('.submit'),:class=>'btn'
