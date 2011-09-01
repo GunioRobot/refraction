@@ -3,7 +3,7 @@ class Admin::SitesController < ApplicationController
   include HTTParty
   
   def index
-    @sites=Site.order_by([[:created_at, :desc]])
+    @sites=Site.where(:this_site.ne=>true).order_by([[:created_at, :desc]])
   end
   
   def circled_you

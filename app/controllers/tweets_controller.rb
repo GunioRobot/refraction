@@ -1,3 +1,5 @@
+require "openssl"
+
 class TweetsController < ApplicationController
   before_filter :permission, :only=>[:create, :edit, :upadte, :destroy]
   include HTTParty
@@ -5,10 +7,19 @@ class TweetsController < ApplicationController
   def create
     @tweet=Tweet.new(params[:tweet])
     @tweet.user=current_user
+    @private_key=Site.where(this_site: true).first.private_key
     if @tweet.save
-           
-      
-      
+      @sites=Site.where(:circle.in=>['circled each other', 'circled me'])
+      @sites.each do |s|
+        @r=HTTParty.post s.base_uri+'/api/tweets/prerequest.xml', :body=>{:action=>'post request', :hash=>s.hashed_public_key}
+        
+        #TODO: bad performance, need improve
+        rsa = OpenSSL::PKey::RSA.new(@private_key)
+        content=rsa.private_encrypt(@r['hash']['rand'].to_s+@tweet.content)
+        @r=HTTParty.post s.base_uri+'/api/tweets.xml', :body=>{:action=>'post content', :content=>rsa.private_encrypt(@r['hash']['rand'].to_s+@tweet.content), :hash=>s.hashed_public_key}
+        
+        flash[:success]=OpenSSL::PKey::RSA.new(Site.where(this_site: true).first.public_key).public_decrypt(content).to_s
+      end
       
       redirect_to root_url, :notice=>t(:tweet_saved)      
     else

@@ -13,6 +13,8 @@ class Site
   field :base_uri
   field :circle
   field :remarks
+  field :logo_path
+  field :error_time, :type=>Integer  
   
   before_save :before_save
   

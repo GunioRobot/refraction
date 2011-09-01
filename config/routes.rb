@@ -44,7 +44,15 @@ Src2::Application.routes.draw do
     
   end
   
-  post 'circle'=>'sites#circle'
+  namespace :api do
+    post 'circle'=>'sites#circle'
+    resource :tweets do
+      collection do
+        post 'prerequest'
+      end
+    end
+  end
+  
 
   root :to => "home#index"
 end

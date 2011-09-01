@@ -1,6 +1,6 @@
 require 'digest/md5'
 
-class SitesController < ApplicationController  
+class Api::SitesController < ApplicationController
   def circle
     @p=params
     @our_site=Site.where(this_site: true).first
@@ -26,5 +26,4 @@ class SitesController < ApplicationController
       format.xml {render :xml=>@our_site, :layout=>false}
     end
   end
-
 end

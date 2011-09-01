@@ -6,8 +6,10 @@ class Tweet
   field :content
   field :title
   field :closed, :type=>Boolean, :default=>false
+
   
   belongs_to :user
+  belongs_to :site
   references_many :comments
   has_one :retweet, :class_name=>'Tweet'
 
