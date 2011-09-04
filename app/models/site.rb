@@ -1,3 +1,6 @@
+require "openssl"
+require 'digest/md5'
+
 class Site
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -26,6 +29,35 @@ class Site
     {:public_key=>public_key, :hashed_public_key=>hashed_public_key,:site_name=>site_name, :site_description=>site_description,
       :site_uri=>base_uri
     }
+  end
+  
+  #regenerate key pairs and hashed public key
+  def regernate_keys
+    return false unless this_site
+    rsa = OpenSSL::PKey::RSA.new(2048)
+    self.public_key, self.private_key = rsa.public_key.to_pem, rsa.to_pem
+    self.hashed_public_key=Digest::MD5.hexdigest(public_key)
+    save
+  end
+  
+  def private_encrypt(string)
+    rsa=OpenSSL::PKey::RSA.new(private_key)
+    rsa.private_encrypt(string)
+  end
+  
+  def private_decrypt(string)
+    rsa=OpenSSL::PKey::RSA.new(private_key)
+    rsa.private_decrypt(string)
+  end
+  
+  def public_encrypt(string)
+    rsa=OpenSSL::PKey::RSA.new(public_key)
+    rsa.public_encrypt(string)
+  end
+  
+  def private_decrypt(srting)
+    rsa=OpenSSL::PKey::RSA.new(public_key)
+    rsa.prublic_decrypt(string)
   end
 
 end

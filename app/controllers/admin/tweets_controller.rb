@@ -5,6 +5,7 @@ class Admin::TweetsController < ApplicationController
     @tweets=Tweet.all.order_by([:created_at, :desc]) 
     @count=Tweet.count
   end
+  
 
   def destroy
     @tweet=Tweet.find(params[:id])

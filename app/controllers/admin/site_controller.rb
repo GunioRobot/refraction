@@ -37,10 +37,7 @@ class Admin::SiteController < ApplicationController
   
   def regenerate_keys
     @site=Site.where(this_site: true).first
-    rsa = OpenSSL::PKey::RSA.new(2048)
-    @site.public_key, @site.private_key = rsa.public_key.to_pem, rsa.to_pem
-    @site.hashed_public_key=Digest::MD5.hexdigest(@site.public_key)
-    @site.save
+    @site.regernate_keys
     Log.new(:from=>current_user, :action=>'re-generated key pairs').save
     respond_to do |format|
       format.html {redirect_to admin_site_config_url}

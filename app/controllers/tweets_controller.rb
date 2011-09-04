@@ -1,4 +1,5 @@
 require "openssl"
+require 'digest/md5'
 
 class TweetsController < ApplicationController
   before_filter :permission, :only=>[:create, :edit, :upadte, :destroy]
@@ -7,18 +8,17 @@ class TweetsController < ApplicationController
   def create
     @tweet=Tweet.new(params[:tweet])
     @tweet.user=current_user
-    @private_key=Site.where(this_site: true).first.private_key
+    @site=Site.where(this_site: true).first
+    content=@site.private_encrypt(@tweet.id.to_s+'$$$'+@tweet.content)
     if @tweet.save
-      @sites=Site.where(:circle.in=>['circled each other', 'circled me'])
+      @sites=Site.where(:this_site.ne=>true)
       @sites.each do |s|
-        @r=HTTParty.post s.base_uri+'/api/tweets/prerequest.xml', :body=>{:action=>'post request', :hash=>s.hashed_public_key}
         
-        #TODO: bad performance, need improve
-        rsa = OpenSSL::PKey::RSA.new(@private_key)
-        content=rsa.private_encrypt(@r['hash']['rand'].to_s+@tweet.content)
-        @r=HTTParty.post s.base_uri+'/api/tweets.xml', :body=>{:action=>'post content', :content=>rsa.private_encrypt(@r['hash']['rand'].to_s+@tweet.content), :hash=>s.hashed_public_key}
+        #OPTION: get a random string from other, bad performance. private encrypte for each site
+        #@r=HTTParty.post s.base_uri+'/api/tweets/prerequest.xml', :body=>{:action=>'post request', :hash=>s.hashed_public_key}
+        @r=HTTParty.post s.base_uri+'/api/tweets.xml', :body=>{:action=>'post content', :content=>content, :hash=>@site.hashed_public_key}
         
-        flash[:success]=OpenSSL::PKey::RSA.new(Site.where(this_site: true).first.public_key).public_decrypt(content).to_s
+        logger.debug '######'+Digest::MD5.hexdigest(@site.public_key)
       end
       
       redirect_to root_url, :notice=>t(:tweet_saved)      
@@ -64,9 +64,6 @@ class TweetsController < ApplicationController
 
   def destroy
     @tweet=Tweet.find(params[:id])
-    puts @tweet.user.name
-    puts current_user.name
-    puts @tweet.user==current_user
     render_403&&return unless @tweet.user==current_user
     if @tweet.destroy
       flash[:success]=t('.Deleted successfully')      

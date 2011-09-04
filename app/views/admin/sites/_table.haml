@@ -6,6 +6,7 @@
     %th=t('.relation')
     %th=t('.remarks')
     %th=t('.added at')
+    %th
   -@sites.each do |s|
     %tr
       %td=s.hashed_public_key
@@ -14,3 +15,4 @@
       %td=s.circle
       %td=s.remarks
       %td=s.created_at
+      %td=link_to t('.details'),admin_site_url(s)

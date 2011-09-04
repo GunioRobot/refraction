@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class Tweet
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -6,6 +8,7 @@ class Tweet
   field :content
   field :title
   field :closed, :type=>Boolean, :default=>false
+  field :hash
 
   
   belongs_to :user
@@ -13,11 +16,20 @@ class Tweet
   references_many :comments
   has_one :retweet, :class_name=>'Tweet'
 
-  validates_presence_of :content, :user
+  validates_presence_of :content
   
   attr_accessible :content
 
   before_destroy :delete_comments
+  before_save :before_save
+  
+  def before_save
+    if(site) #if this is from other site
+      self.hash=Digest::MD5.hexdigest(content) #content=id+content
+      throw 'already have' if Tweet.where(hash: hash).first
+      self.content=self.content.sub(/^[a-z0-9]+\$\$\$/,'')
+    end
+  end
 
   def open?
     !self.closed

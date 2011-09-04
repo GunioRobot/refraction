@@ -61,6 +61,12 @@ en:
     sites:
       index:
         circle site: 'Circle a site'
+      show:
+        site name: 'Site Name'
+        site description: 'Site Description'
+        base uri: 'Base URI'
+        hashed public key: 'Hashed Public Key'
+        public key: 'Public Key'
       table:
         added at: 'Added At'
         hash: 'Hash Value'
@@ -68,6 +74,7 @@ en:
         site description: 'Site Description'
         add a site: 'Circle a site'
         remarks: 'Remarks'
+        details: 'Details'
       nav:
         sites in your circles: 'Sites in your circles'
         all: 'All sites'
