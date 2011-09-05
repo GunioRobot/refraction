@@ -18,6 +18,15 @@ class TweetTest < ActiveSupport::TestCase
     assert Comment.all.count==0
   end
   
+  test 'tweet with same id and hash caanot insert' do
+    @site=Factory :site
+    @tweet=Factory :tweet, :site=>@site
+    @tweet.save
+    
+    @t=Factory :tweet, :site=>@site
+    assert_raise('already have')  {@t.save}
+  end
+  
 
 
 end

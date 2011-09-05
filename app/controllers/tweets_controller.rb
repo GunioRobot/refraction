@@ -1,5 +1,4 @@
 require "openssl"
-require 'digest/md5'
 
 class TweetsController < ApplicationController
   before_filter :permission, :only=>[:create, :edit, :upadte, :destroy]
@@ -12,13 +11,10 @@ class TweetsController < ApplicationController
     content=@site.private_encrypt(@tweet.id.to_s+'$$$'+@tweet.content)
     if @tweet.save
       @sites=Site.where(:this_site.ne=>true)
-      @sites.each do |s|
-        
+      @sites.each do |s|        
         #OPTION: get a random string from other, bad performance. private encrypte for each site
         #@r=HTTParty.post s.base_uri+'/api/tweets/prerequest.xml', :body=>{:action=>'post request', :hash=>s.hashed_public_key}
         @r=HTTParty.post s.base_uri+'/api/tweets.xml', :body=>{:action=>'post content', :content=>content, :hash=>@site.hashed_public_key}
-        
-        logger.debug '######'+Digest::MD5.hexdigest(@site.public_key)
       end
       
       redirect_to root_url, :notice=>t(:tweet_saved)      
@@ -33,7 +29,15 @@ class TweetsController < ApplicationController
     @comment=Comment.new
     @comments=@tweet.comments.all.order_by([:created_at, :desc])
     @comments_num=@tweet.comments.count
-    
+    respond_to do |format|
+      format.html
+    end    
+  end
+
+  def comments_count
+    respond_to do |format|
+      format.xml {render :xml=>{:num=>Tweet.find(params[:id]).comments.count}}
+    end
   end
 
   def edit

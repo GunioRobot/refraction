@@ -1,8 +1,7 @@
 =form_for(@comment) do |f|
   - if !f.object.errors.blank?
     = render :partial => 'share/error_messages', :locals => {:object => f.object}
-  #editor-button-bar
-  =f.text_area(:content, :size => "70x6") 
-  %br
+  .clearfix
+    =f.text_area(:content, :size => "70x6", :class=>'xxlarge')
   =hidden_field_tag :tweet_id,@tweet.id
-  = f.submit t('.submit'),:class=>'button'
+  = f.submit t('.submit'),:class=>'btn'

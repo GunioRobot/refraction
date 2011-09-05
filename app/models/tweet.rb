@@ -9,6 +9,7 @@ class Tweet
   field :title
   field :closed, :type=>Boolean, :default=>false
   field :hash
+  field :id_in_sender
 
   
   belongs_to :user
@@ -24,9 +25,11 @@ class Tweet
   before_save :before_save
   
   def before_save
-    if(site) #if this is from other site
-      self.hash=Digest::MD5.hexdigest(content) #content=id+content
-      throw 'already have' if Tweet.where(hash: hash).first
+    if(self.site_id) #if this is from other site
+      self.hash=Digest::MD5.hexdigest(self.content) #content=id+content
+      self.id_in_sender=self.content.match(/^([a-z0-9]+)\$\$\$/)[1]
+      #BUG here
+      throw 'already have' if Tweet.where(hash: self.hash).and(site_id: self.site_id).first
       self.content=self.content.sub(/^[a-z0-9]+\$\$\$/,'')
     end
   end

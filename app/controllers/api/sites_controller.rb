@@ -1,6 +1,8 @@
 require 'digest/md5'
 
 class Api::SitesController < ApplicationController
+
+  #ohter site request key exchange
   def circle
     @p=params
     @our_site=Site.where(this_site: true).first
@@ -12,6 +14,11 @@ class Api::SitesController < ApplicationController
       else
         @site.circle='circled me'
       end
+
+      #bug: temp solution, big security bug. auth needed
+      @site.update_attributes(:site_name=>params[:site_name],
+        :site_description=>params[:site_description],
+        :base_uri=>params[:base_uri])
       @site.save
     else
       @site=Site.new(:public_key=>params[:public_key],:site_name=>params[:site_name],
@@ -26,4 +33,12 @@ class Api::SitesController < ApplicationController
       format.xml {render :xml=>@our_site, :layout=>false}
     end
   end
+
+  #return a private encrypted base_uri
+  def base_uri
+    @base_uri=Site.where(this_site: true).first
+    
+
+  end
+
 end

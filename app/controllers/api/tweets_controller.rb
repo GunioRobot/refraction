@@ -1,5 +1,3 @@
-require 'digest/md5'
-
 class Api::TweetsController < ApplicationController
   
   '''Return a rand string to requester first.
@@ -16,18 +14,12 @@ class Api::TweetsController < ApplicationController
   end
   
   def create
-    render_403 && return unless requester_site=Site.where(hashed_public_key: params[:hash]).first
-    rsa=OpenSSL::PKey::RSA.new(requester_site.public_key)
-    logger.debug '######'+Digest::MD5.hexdigest(requester_site.public_key)
+    render_403 && return unless requester_site=Site.where(hashed_public_key: params[:hash]).first   
     
-   begin
-      content=rsa.public_decrypt(params[:content])
-      logger.debug '######'+content
+      content=requester_site.public_decrypt(params[:content])
       tweet=Tweet.new(:content=>content)
       tweet.site=requester_site
       tweet.save!
-   rescue
-      render_403
-   end            
+    
   end
 end

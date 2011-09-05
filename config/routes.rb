@@ -1,7 +1,11 @@
 Src2::Application.routes.draw do
   devise_for :users
   #devise_for :visitors
-  resources :tweets
+  resources :tweets do
+    member do
+    get :comments_count
+    end
+  end
   
   resources :tweets do
     resources :comments

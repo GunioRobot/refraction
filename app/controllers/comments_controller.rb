@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
   def create
-
     begin
       @tweet=Tweet.find(params[:tweet_id])
     rescue
@@ -26,7 +25,14 @@ class CommentsController < ApplicationController
       flash[:error]=t('.Failed, please try again')
     end
     redirect_to :back
+  end
 
+  def index
+    @tweet=Tweet.find(params[:tweet_id])
+    @comments=@tweet.comments.all.order_by([:created_at, :desc])
+    respond_to do |format|
+      format.xml {render :xml=>@comments}
+    end
   end
 
 end

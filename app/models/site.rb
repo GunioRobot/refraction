@@ -27,7 +27,7 @@ class Site
 
   def to_hash
     {:public_key=>public_key, :hashed_public_key=>hashed_public_key,:site_name=>site_name, :site_description=>site_description,
-      :site_uri=>base_uri
+      :base_uri=>base_uri
     }
   end
   
@@ -55,9 +55,9 @@ class Site
     rsa.public_encrypt(string)
   end
   
-  def private_decrypt(srting)
+  def public_decrypt(string)
     rsa=OpenSSL::PKey::RSA.new(public_key)
-    rsa.prublic_decrypt(string)
+    rsa.public_decrypt(string)
   end
 
 end

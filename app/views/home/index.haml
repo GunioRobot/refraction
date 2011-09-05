@@ -3,25 +3,45 @@
   =render 'tweets/form'
 #tweets
   - @tweets.each do |tweet|
-    .tweet
-      .hd
-        =avatar_url(tweet.user)
-      .bd
-        .text
-          %span.username=link_to(tweet.user.name, user_url(tweet.user))+':'
-          =tweet.content
-        .ft
-          %span.timestamp=tweet.created_at
-        .clear-both
-        .reply_button
-          -comments_num=tweet.comments.count
-          -if comments_num>1
-            =link_to t('.Comments'), tweet_url(tweet)
-          -else
-            =link_to t('.Comment'), tweet_url(tweet)
-          ='('+comments_num.to_s+')'
-          -if current_user==tweet.user
-            =link_to t('.Delete'), tweet_path(tweet), :confirm => t(".Are you sure?"), :method=>:delete
+    -if tweet.user
+      .tweet
+        .hd
+          =avatar_url(tweet.user)
+        .bd
+          .text
+            %span.username=link_to(tweet.user.name, user_url(tweet.user))+':'
+            =tweet.content
+          .ft
+            %span.timestamp=tweet.created_at
+          .clear-both
+          .reply_button
+            -comments_num=tweet.comments.count
+            -if comments_num>1
+              =link_to t('.Comments'), tweet_url(tweet)
+            -else
+              =link_to t('.Comment'), tweet_url(tweet)
+            ='('+comments_num.to_s+')'
+            -if current_user==tweet.user
+              =link_to t('.Delete'), tweet_path(tweet), :confirm => t(".Are you sure?"), :method=>:delete
+    -else
+      .tweet
+        .hd hold
+        .bd
+          .text
+            %span.username=link_to(tweet.site.site_name, tweet.site.base_uri)+':'
+            =tweet.content
+          .ft
+            %span.timestamp=tweet.created_at
+          .clear-both
+          .reply_button
+            -comments_num=tweet.comments.count
+            -if comments_num>1
+              =link_to t('.Comments'), tweet_url(tweet)
+            -else
+              =link_to t('.Comment'), tweet_url(tweet)
+            ='('+comments_num.to_s+')'
+            -if current_user==tweet.user
+              =link_to t('.Delete'), tweet_path(tweet), :confirm => t(".Are you sure?"), :method=>:delete
 
             
         

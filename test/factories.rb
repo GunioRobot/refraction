@@ -9,7 +9,9 @@ end
 Factory.define :tweet do |tweet|
   tweet.title 'title'
   tweet.content 'content'
+  tweet.hash 'hash'
   tweet.association :user
+  tweet.association :site
 end
 
 
@@ -19,25 +21,7 @@ Factory.define :comment do |comment|
   comment.association :user
   comment.association :tweet
 end
-=begin
-Factory.define :reply do |reply|
-  reply.content 'content'
-  reply.association :user
-  reply.association :topic
-end
 
-Factory.define :status_base, :class => Status::Base do |s|
-  s.association :user
+Factory.define :site do |site|
+  
 end
-
-Factory.define :status_reply, :class => Status::Reply do |s|
-  s.association :user
-  s.association :topic
-  s.association :reply
-end
-
-Factory.define :status_topic, :class => Status::Topic do |s|
-  s.association :user
-  s.association :topic
-end
-=end
