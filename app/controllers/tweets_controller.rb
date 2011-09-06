@@ -33,7 +33,7 @@ class TweetsController < ApplicationController
       result=HTTParty.get @tweet.site.base_uri+'/tweets/'+@tweet.id_in_sender+'/comments_counter.xml'
       @comments_num=result['hash']['num']
       @comments=HTTParty.get @tweet.site.base_uri+'/tweets/'+@tweet.id_in_sender+'/comments.xml'
-      @comments=@comments['comments']
+      @comments=@comments['comments']||=[]
       
     end
     respond_to do |format|

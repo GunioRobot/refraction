@@ -4,10 +4,11 @@ class Comment
   
   referenced_in :tweet
   referenced_in :user
+  referenced_in :site
   
   field :content
   
-  validates_presence_of :content, :user, :tweet
+  validates_presence_of :content, :tweet
   attr_accessible :content
   
 end

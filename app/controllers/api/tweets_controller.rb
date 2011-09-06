@@ -15,11 +15,14 @@ class Api::TweetsController < ApplicationController
   
   def create
     render_403 && return unless requester_site=Site.where(hashed_public_key: params[:hash]).first   
-    
+    begin
       content=requester_site.public_decrypt(params[:content])
       tweet=Tweet.new(:content=>content)
       tweet.site=requester_site
       tweet.save!
+    rescue
+      render_403
+    end
     
   end
 end

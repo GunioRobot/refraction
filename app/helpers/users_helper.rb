@@ -4,8 +4,8 @@ module UsersHelper
     link_to result['user']['name'], base_uri+'/users/'+id
   end
 
-  def gravta(id,base_uri)
+  def user_gravta(id,base_uri)
     result=HTTParty.get base_uri+'/users/'+id+'.xml'
-    gravatar_image_tag(result['user']['email'],:gravatar => { :size => 40 })
+    gravatar_image_tag(result['user']['email'],:gravatar => { :size => 48 })
   end
 end

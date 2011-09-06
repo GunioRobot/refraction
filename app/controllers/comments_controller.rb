@@ -6,12 +6,29 @@ class CommentsController < ApplicationController
       render_404
       return
     end
-    @comment=@tweet.comments.new(params[:comment])
-    @comment.user=current_user
-    if @comment.save
-      flash[:success]='success';
+    if @tweet.user 
+      if params[:hashed_public_key]
+        site=Site.where(hashed_public_key: params[:hashed_public_key]).first
+        comment=@tweet.comments.new(:content=>site.public_decrypt(params[:content]))
+        comment.site_id=site.id
+        comment.save!
+      else
+        @comment=@tweet.comments.new(params[:comment])
+        @comment.user=current_user
+        if @comment.save
+          flash[:success]='success';
+        else
+          flash[:error]='error';
+        end
+      end
     else
-      flash[:error]='error';
+      content=params[:comment]['content']
+      remote_site=@tweet.site
+      our_site=Site.where(this_site: true).first
+      tweet_id=@tweet.id_in_sender
+      content=our_site.private_encrypt(content)
+      HTTParty.post remote_site.base_uri+'/tweets/'+tweet_id+'/comments.xml',
+        :body=>{:content=>content,:hashed_public_key=>our_site.hashed_public_key}
     end
     redirect_to tweet_url(@tweet)
   end

@@ -25,7 +25,7 @@
               =link_to t('.Delete'), tweet_path(tweet), :confirm => t(".Are you sure?"), :method=>:delete
     -else
       .tweet
-        .hd hold
+        .hd=gravta(tweet.site.email)
         .bd
           .text
             %span.username=link_to(tweet.site.site_name, tweet.site.base_uri)+':'

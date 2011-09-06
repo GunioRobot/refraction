@@ -16,10 +16,12 @@ class Site
   field :base_uri
   field :circle
   field :remarks
+  field :email
   field :logo_path
   field :error_time, :type=>Integer  
   
   before_save :before_save
+  has_many :tweets
   
   def before_save
     key_created_at=updated_at if public_key_changed?||private_key_changed?
@@ -27,7 +29,7 @@ class Site
 
   def to_hash
     {:public_key=>public_key, :hashed_public_key=>hashed_public_key,:site_name=>site_name, :site_description=>site_description,
-      :base_uri=>base_uri
+      :base_uri=>base_uri, :email=>email
     }
   end
   

@@ -24,6 +24,8 @@ en:
   comments:
     form:
       submit: 'Sumit'
+    remote_form:
+      submit: 'Sumit'
   home:
     index:
       shomepage: '的主页'
@@ -58,6 +60,7 @@ en:
         private key: 'Private Key'
         dangerous: 'Dangerous, you will no longer receive or send messages to other sites'
         hashed public key: 'Hashed Public Key'
+        gravatar: 'Gravatar'
     sites:
       index:
         circle site: 'Circle a site'

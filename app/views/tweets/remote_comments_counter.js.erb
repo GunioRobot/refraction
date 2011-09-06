@@ -1,5 +1,9 @@
-<% if @num==1 %>
-$('#<%=@id%>').html('<%=escape_javascript(link_to t('.Comment'), tweet_url(@tweet))%>(<%=@num%>)');
+<%if @num%>
+  <% if @num==1 %>
+  $('#<%=@id%>').html('<%=escape_javascript(link_to t('.Comment'), tweet_url(@tweet))%>(<%=@num%>)');
+  <%else%>
+  $('#<%=@id%>').html('<%=escape_javascript(link_to t('.Comments'), tweet_url(@tweet))%>(<%=@num%>)');
+  <%end%>
 <%else%>
-$('#<%=@id%>').html('<%=escape_javascript(link_to t('.Comments'), tweet_url(@tweet))%>(<%=@num%>)');
+  $('#<%=@id%>').html('<font color="red">Remote Deleted</font>')
 <%end%>

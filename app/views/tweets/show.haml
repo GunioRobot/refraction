@@ -9,7 +9,7 @@
     #text
       =@tweet.content
   -else
-    placeholder
+    =gravta(@tweet.site.email)
     %span.sitename=link_to(@tweet.site.site_name, @tweet.site.base_uri)
     %span=@tweet.created_at
     -if @tweet.user==current_user
@@ -18,7 +18,9 @@
     #text
       =@tweet.content
 %hr
+
 =render 'comments/form'
+
 
 #comments
   -if @comments_num>1
@@ -39,7 +41,7 @@
       -else
         /=avatar_url(comment.user)
         /%span.username=link_to(comment.user.name, user_url(comment.user
-        =gravta(comment['user_id'],@tweet.site.base_uri)
+        =user_gravta(comment['user_id'],@tweet.site.base_uri)
         =display_remote_user_name(comment['user_id'],@tweet.site.base_uri)
         %span=comment['created_at']
         #text

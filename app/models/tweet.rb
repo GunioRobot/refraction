@@ -26,10 +26,10 @@ class Tweet
   
   def before_save
     if(self.site_id) #if this is from other site
-      self.hash=Digest::MD5.hexdigest(self.content) #content=id+content
+      hash=Digest::MD5.hexdigest(self.content) #content=id+content
+      self.hash=hash
       self.id_in_sender=self.content.match(/^([a-z0-9]+)\$\$\$/)[1]
-      #BUG here
-      throw 'already have' if Tweet.where(hash: self.hash).and(site_id: self.site_id).first
+      raise 'already have this' if Tweet.where(hash: hash).and(site_id: site_id).first
       self.content=self.content.sub(/^[a-z0-9]+\$\$\$/,'')
     end
   end

@@ -10,6 +10,12 @@
   .clearfix
     =f.label :site_description
     .input=f.text_area(:site_description, :class=>'xxlarge', :size => "24x6")
+  .clearfix
+    =f.label :email
+    .input=f.text_field(:email, :class=>'xxlarge', :size => "24x6")
+  .clearfix
+    =label_tag t('.gravatar')
+    .input=gravatar_image_tag(@site.email,:gravatar => { :size => 40 })
   .actions=f.submit(t('.update'),:class=>"btn primary")
 
 %h5
