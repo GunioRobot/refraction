@@ -3,7 +3,11 @@ Src2::Application.routes.draw do
   #devise_for :visitors
   resources :tweets do
     member do
-    get :comments_count
+    get :comments_counter
+    
+    end
+    collection do
+      get :remote_comments_counter
     end
   end
   

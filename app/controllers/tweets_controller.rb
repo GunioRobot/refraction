@@ -24,19 +24,38 @@ class TweetsController < ApplicationController
   end
   
   def show
-    #puts 'abc'
     @tweet=Tweet.find(params[:id])
     @comment=Comment.new
-    @comments=@tweet.comments.all.order_by([:created_at, :desc])
-    @comments_num=@tweet.comments.count
+    if @tweet.user      
+      @comments=@tweet.comments.all.order_by([:created_at, :desc])
+      @comments_num=@tweet.comments.count
+    else
+      result=HTTParty.get @tweet.site.base_uri+'/tweets/'+@tweet.id_in_sender+'/comments_counter.xml'
+      @comments_num=result['hash']['num']
+      @comments=HTTParty.get @tweet.site.base_uri+'/tweets/'+@tweet.id_in_sender+'/comments.xml'
+      @comments=@comments['comments']
+      
+    end
     respond_to do |format|
       format.html
     end    
   end
 
-  def comments_count
+  def comments_counter
     respond_to do |format|
       format.xml {render :xml=>{:num=>Tweet.find(params[:id]).comments.count}}
+    end
+  end
+
+  def remote_comments_counter
+    @id=params[:id]
+    tweet_id=params[:tweet_id]
+    @tweet=Tweet.find(@id)
+    base_uri=params[:base_uri]
+    result=HTTParty.get base_uri+'/tweets/'+tweet_id+'/comments_counter.xml'
+    @num=result['hash']['num']
+    respond_to do |format|
+      format.js {render :layout=>false}
     end
   end
 
