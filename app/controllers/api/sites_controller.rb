@@ -36,9 +36,29 @@ class Api::SitesController < ApplicationController
 
   #return a private encrypted base_uri
   def base_uri
-    @base_uri=Site.where(this_site: true).first
-    
+    @base_uri=Site.where(this_site: true).first.base_uri
+    respond_to do |format|
+      format.xml {render :xml=>@base_uri}
+    end
+  end
 
+  def name
+    respond_to do|format|
+      format.xml {render :xml=>Site.where(this_site: true).first.site_name}
+    end
+  end
+
+  def email
+    respond_to do|format|
+      format.xml {render :xml=>Site.where(this_site: true).first.site_email}
+    end
+  end
+
+  def show
+    @site=Site.find(params[:id])
+    respond_to do|format|
+      format.xml {render :xml=>@site}
+    end
   end
 
 end

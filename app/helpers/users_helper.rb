@@ -8,4 +8,9 @@ module UsersHelper
     result=HTTParty.get base_uri+'/users/'+id+'.xml'
     gravatar_image_tag(result['user']['email'],:gravatar => { :size => 48 })
   end
+
+  def get_user_info(id,base_uri)
+    result=HTTParty.get base_uri+'/users/'+id+'.xml'
+    result['user']
+  end
 end

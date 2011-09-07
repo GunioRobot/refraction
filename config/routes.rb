@@ -54,6 +54,12 @@ Src2::Application.routes.draw do
   
   namespace :api do
     post 'circle'=>'sites#circle'
+    get 'site_name'=>'sites#name'
+    get 'site_email'=>'sites#email'
+    get 'site_base_uri'=>'sites#base_uri'
+    
+    resource :sites
+    
     resource :tweets do
       collection do
         post 'prerequest'

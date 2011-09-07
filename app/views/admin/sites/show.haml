@@ -8,6 +8,16 @@
     %span.uneditable-input{:style=>'width:250px;'}=@site.site_name
 
 .clearfix
+  %label=t('.site email')
+  .input
+    %span.uneditable-input{:style=>'width:250px;'}=@site.email
+
+.clearfix
+  %label=t('.site avatar')
+  .input=gravta(@site.email)
+
+
+.clearfix
   %label=t('.site description')
   .input    
     %textarea.xxlarge{:readonly=>true, :clos=>"30", :rows=>"10", :style=>'width:560px;'}

@@ -10,7 +10,7 @@
       =@tweet.content
   -else
     =gravta(@tweet.site.email)
-    %span.sitename=link_to(@tweet.site.site_name, @tweet.site.base_uri)
+    %span.sitename=link_to(@tweet.site.site_name, @tweet.site.base_uri)+'(site)'
     %span=@tweet.created_at
     -if @tweet.user==current_user
       %span=link_to t('.Delete'), tweet_url(@tweet), :confirm=>t(".Are you sure?"), :method=>:delete
@@ -23,7 +23,7 @@
 
 
 #comments
-  -if @comments_num>1
+  -if @comments_num!=1
     %h2=@comments_num.to_s+' '+ t('.Comments')
   -else
     %h2=@comments_num.to_s+' '+ t('.Comment')
@@ -31,18 +31,35 @@
     %hr
     .comment
       -if(comment.class!=Hash)
-        =avatar_url(comment.user)
-        %span.username=link_to(comment.user.name, user_url(comment.user))
-        %span=comment.created_at
-        -if comment.user==current_user||comment.tweet.user==current_user
-          %span.delete=link_to t('.Delete'), comment_url(comment), :confirm => t(".Are you sure?"), :method=>:delete
-        #text
-          =comment.content
+        -if(comment.user)  
+          =avatar_url(comment.user)
+          %span.username=link_to(comment.user.name, user_url(comment.user))
+          %span=comment.created_at
+          -if comment.user==current_user||comment.tweet.user==current_user
+            %span.delete=link_to t('.Delete'), comment_url(comment), :confirm => t(".Are you sure?"), :method=>:delete
+          #text
+            =comment.content
+        -else 
+          =gravta(comment.site.email)
+          %span.username=link_to(comment.site.site_name, comment.site.base_uri)+'(site)'
+          %span=comment.created_at
+          -if comment.tweet.user==current_user
+            %span.delete=link_to t('.Delete'), comment_url(comment), :confirm => t(".Are you sure?"), :method=>:delete
+          #text
+            =comment.content
       -else
-        /=avatar_url(comment.user)
-        /%span.username=link_to(comment.user.name, user_url(comment.user
-        =user_gravta(comment['user_id'],@tweet.site.base_uri)
-        =display_remote_user_name(comment['user_id'],@tweet.site.base_uri)
-        %span=comment['created_at']
-        #text
-          =comment['content']
+        -if(comment['user_id'])
+          -user_info=get_user_info(comment['user_id'],@tweet.site.base_uri)
+          =gravta(user_info['email'])
+          =link_to user_info['name'],@base_uri+'/users/'+comment['user_id']
+          %span=comment['created_at']
+          #text
+            =comment['content']
+        -else
+          -site_info=get_site_info(@base_uri,comment['site_id'])
+          =gravta(site_info['email'])
+          =link_to site_info['site_name'],site_info['base_uri']
+          (site)
+          %span=comment['created_at']
+          #text
+            =comment['content']

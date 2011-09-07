@@ -27,6 +27,8 @@ class Admin::SitesController < ApplicationController
 
   def create
     @our_site=Site.where(this_site: true).first #our site info
+
+    #BUG: server will down, if ask localhost
     @r= HTTParty.post params[:url], :body=>@our_site.to_hash #post our info to remote, get respond
 
     if @r.header.code=='200' #response success
@@ -48,8 +50,7 @@ class Admin::SitesController < ApplicationController
       end
     end
 
-    #TODO errors need to be handled
-    
+    #TODO errors need to be handled 
       
     @sites=Site.where(:this_site.ne=>true).order_by([[:created_at, :desc]])
 
