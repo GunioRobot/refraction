@@ -25,7 +25,7 @@ class TweetsController < ApplicationController
   
   def show
     @tweet=Tweet.find(params[:id])
-    @base_uri=@tweet.site.base_uri
+    
     @comment=Comment.new
     if @tweet.user      
       @comments=@tweet.comments.all.order_by([:created_at, :desc])
@@ -35,6 +35,7 @@ class TweetsController < ApplicationController
       @comments_num=result['hash']['num']
       @comments=HTTParty.get @tweet.site.base_uri+'/tweets/'+@tweet.id_in_sender+'/comments.xml'
       @comments=@comments['comments']||=[]     
+      @base_uri=@tweet.site.base_uri
     end
     respond_to do |format|
       format.html

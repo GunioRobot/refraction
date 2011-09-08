@@ -10,6 +10,7 @@ class Tweet
   field :closed, :type=>Boolean, :default=>false
   field :hash
   field :id_in_sender
+  field :circle, :type=>Array
 
   
   belongs_to :user

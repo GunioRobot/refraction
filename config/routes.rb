@@ -34,14 +34,24 @@ Src2::Application.routes.draw do
       end
     end
     
+    resources :circles do
+      collection do
+        post 'add_sites_to_circles'
+        post 'add_users_to_circles'
+      end
+    end
     resources :tweets, :only=>[:index, :destroy, :show]
     resources :comments, :only=>[:index, :destroy]
     resources :logs, :only=>[:index]
     resources :sites do
+      member do
+        post 'add_circles_to_site'
+        delete 'remove_circle_from_site', :as=>'remove_circle_from_site'
+      end
       collection do
         get 'circled_you', :as=>'circled_you'
         get 'you_circled', :as=>'you_circled'
-        get 'circled_each_other', :as=>'circled_each_other'
+        get 'circled_each_other', :as=>'circled_each_other'        
       end
   end
     
@@ -58,9 +68,9 @@ Src2::Application.routes.draw do
     get 'site_email'=>'sites#email'
     get 'site_base_uri'=>'sites#base_uri'
     
-    resource :sites
+    resources :sites
     
-    resource :tweets do
+    resources :tweets do
       collection do
         post 'prerequest'
       end

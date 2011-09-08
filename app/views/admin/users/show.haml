@@ -6,13 +6,13 @@ Roles:
 
 -form_tag({:action => "addroles"}, :remote => true) do
   =text_field_tag(:add_roles)
-  =submit_tag t('.Add roles')
+  =submit_tag t('.Add roles'),:class=>'btn'
 -form_tag({:action=>'removeroles'},:remote=>true) do
   =text_field_tag(:remove_roles)
-  =submit_tag t('.Remove roles')
+  =submit_tag t('.Remove roles'),:class=>'btn'
 -form_tag({:action=>'resetroles'},:remote=>true) do
   =text_field_tag(:reset_roles)
-  =submit_tag t('.Reset roles')
+  =submit_tag t('.Reset roles'),:class=>'btn'
 %hr
 .admin.user.tweets
   %h2='Tweets:'

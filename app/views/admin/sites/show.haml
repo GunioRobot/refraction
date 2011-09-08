@@ -3,6 +3,19 @@
 =render 'nav'
 
 .clearfix
+  %label=t('.circles')
+  .input
+    %span#circles_list
+      =render 'circles'
+
+-form_tag({:action=>'add_circles_to_site'},:remote=>true) do
+  .clearfix
+    %label=t('.add to circles')
+    .input
+      =text_field_tag(:circles)
+      =submit_tag t('.add to circles'),:class=>'btn'
+
+.clearfix
   %label=t('.site name')
   .input
     %span.uneditable-input{:style=>'width:250px;'}=@site.site_name

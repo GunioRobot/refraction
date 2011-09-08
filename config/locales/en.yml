@@ -36,6 +36,10 @@ en:
       Return: 'Return'
       
   admin:
+    circles:
+      index:
+        add users to circles: 'Add users to circles'
+        add sites to circles: 'Add sites to circles'
     nav:
       dashboard: Dashboard
       tweets: Tweets
@@ -70,6 +74,7 @@ en:
         base uri: 'Base URI'
         hashed public key: 'Hashed Public Key'
         public key: 'Public Key'
+        add to circles: 'Add to circles'
       table:
         added at: 'Added At'
         hash: 'Hash Value'

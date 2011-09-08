@@ -22,6 +22,7 @@ class Site
   
   before_save :before_save
   has_many :tweets
+  has_and_belongs_to_many :circles
   
   def before_save
     key_created_at=updated_at if public_key_changed?||private_key_changed?

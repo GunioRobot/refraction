@@ -3,6 +3,7 @@
   %li{:class => (controller_name == 'tweets') ? 'active' : nil}= link_to t('.tweets'), admin_tweets_url
   %li{:class => (controller_name == 'comments') ? 'active' : nil}= link_to t('.comments'), admin_comments_url
   %li{:class => (controller_name == 'users') ? 'active' : nil}= link_to t('.users'), admin_users_url
+  %li{:class => (controller_name == 'circles') ? 'active' : nil}= link_to t('.circles'), admin_circles_url
   %li{:class => (controller_name == 'site') ? 'active' : nil}= link_to t('.site config'), admin_site_config_url
   %li{:class => (controller_name == 'sites') ? 'active' : nil}= link_to t('.sites manage'), admin_sites_url
   %li{:class => (controller_name == 'logs') ? 'active' : nil}= link_to t('.logs'), admin_logs_url

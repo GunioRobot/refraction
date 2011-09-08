@@ -1,0 +1,5 @@
+=render 'admin/nav'
+
+-@circles.each do |c|
+  =link_to c.name, admin_circle_url(c)
+  ='('+c.sites.count.to_s+')'

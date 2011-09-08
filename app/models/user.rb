@@ -19,6 +19,7 @@ class User
   
   has_many :tweets
   references_many :comments
+  has_and_belongs_to_many :circles
   
   validates_uniqueness_of :name, :email, :case_sensitive => false
   before_save :before_save
