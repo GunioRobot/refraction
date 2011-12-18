@@ -3,7 +3,7 @@ require 'test_helper'
 class TweetsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  
+
   def setup
     @request.env["devise.mapping"] = Devise.mappings[:user]
     @request.env["HTTP_REFERER"]='index_url'
@@ -14,8 +14,8 @@ class TweetsControllerTest < ActionController::TestCase
     @tweet=Factory(:tweet, :user=>@tweet_owner)
   end
 
-  test 'others cannot delete a tweet' do  
-    
+  test 'others cannot delete a tweet' do
+
     delete :destroy, :id=>@tweet.id
     assert_response 403, 'anaymous user cannot delete a tweet'
     @tweet=Factory(:tweet, :user=>@tweet_owner)
@@ -23,8 +23,8 @@ class TweetsControllerTest < ActionController::TestCase
     delete :destroy, :id=>@tweet.id
     assert_response 403, 'other user cannot delete a tweet'
   end
-  
-  test 'owner can delete a tweet' do    
+
+  test 'owner can delete a tweet' do
     #@tweet=Factory(:tweet, :user=>@tweet_owner)
     puts @tweet_owner.name
     puts @tweet.user.name
@@ -47,7 +47,7 @@ class TweetsControllerTest < ActionController::TestCase
     get :edit, :id=>@tweet.id
     assert_response 403
   end
-  
+
   test "test show" do
     #get :show, :id=>@tweet.id
   end
@@ -74,18 +74,18 @@ class TweetsControllerTest < ActionController::TestCase
   test "editor can see the submit form" do
     #TODO
   end
-  
+
   test "others cannt see the submit form" do
     #TODO
   end
-  
+
   test "non-permission user cannt post a tweet" do
     sign_in @other_user
     post :create
     assert_response 403
   end
-  
-  test "editor can post a tweet" do    
+
+  test "editor can post a tweet" do
     @other_user.add_roles!('editor')
     sign_in @other_user
     post :create,:tweet => {:content=>'abc'}

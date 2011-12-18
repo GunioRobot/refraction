@@ -6,9 +6,9 @@ class Admin::UsersControllerTest < ActionController::TestCase
     @other_user=Factory :user
     @admin_user=Factory :user
     @admin_user.add_roles!('admin')
-  end  
-  
-  
+  end
+
+
   test "the truth" do
     assert true
   end

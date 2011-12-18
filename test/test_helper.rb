@@ -5,7 +5,7 @@ include Devise::TestHelpers
 
 
 class ActiveSupport::TestCase
-  
+
   # Drop all columns after each test case.
   def teardown
     Mongoid.database.collections.each do |coll|

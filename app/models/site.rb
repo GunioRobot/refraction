@@ -4,7 +4,7 @@ require 'digest/md5'
 class Site
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+
 
   field :public_key
   field :private_key
@@ -18,12 +18,12 @@ class Site
   field :remarks
   field :email
   field :logo_path
-  field :error_time, :type=>Integer  
-  
+  field :error_time, :type=>Integer
+
   before_save :before_save
   has_many :tweets
   has_and_belongs_to_many :circles
-  
+
   def before_save
     key_created_at=updated_at if public_key_changed?||private_key_changed?
   end
@@ -33,7 +33,7 @@ class Site
       :base_uri=>base_uri, :email=>email
     }
   end
-  
+
   #regenerate key pairs and hashed public key
   def regernate_keys
     return false unless this_site
@@ -42,22 +42,22 @@ class Site
     self.hashed_public_key=Digest::MD5.hexdigest(public_key)
     save
   end
-  
+
   def private_encrypt(string)
     rsa=OpenSSL::PKey::RSA.new(private_key)
     rsa.private_encrypt(string)
   end
-  
+
   def private_decrypt(string)
     rsa=OpenSSL::PKey::RSA.new(private_key)
     rsa.private_decrypt(string)
   end
-  
+
   def public_encrypt(string)
     rsa=OpenSSL::PKey::RSA.new(public_key)
     rsa.public_encrypt(string)
   end
-  
+
   def public_decrypt(string)
     rsa=OpenSSL::PKey::RSA.new(public_key)
     rsa.public_decrypt(string)

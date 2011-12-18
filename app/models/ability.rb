@@ -10,10 +10,10 @@ class Ability
     else
       cannot :manage, :all
     end
-    
-    
-    
-    
+
+
+
+
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
 end

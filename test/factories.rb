@@ -23,5 +23,5 @@ Factory.define :comment do |comment|
 end
 
 Factory.define :site do |site|
-  
+
 end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CommentsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  
+
   def setup
     @request.env["devise.mapping"] = Devise.mappings[:user]
     @request.env["HTTP_REFERER"]='index_url'
@@ -10,7 +10,7 @@ class CommentsControllerTest < ActionController::TestCase
     @tweet_owner=Factory.create(:user)
     @comment_owner=Factory.create(:user)
     @other_user=Factory.create(:user)
-    
+
     @tweet=Factory :tweet, :user=>@tweet_owner
     @comment=Factory :comment,:user=>@comment_owner, :tweet=>@tweet
   end
@@ -38,5 +38,5 @@ class CommentsControllerTest < ActionController::TestCase
     assert_not_nil flash[:success], 'tweet owner can delete comments'
   end
 
-  
+
 end

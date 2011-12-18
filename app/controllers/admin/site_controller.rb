@@ -10,22 +10,22 @@ class Admin::SiteController < ApplicationController
       @site.base_uri=request.url.sub(request.fullpath, '')
       @site.save
     end
-    
+
     unless(@site.public_key&&@site.private_key)
       rsa = OpenSSL::PKey::RSA.new(2048)
       @site.public_key, @site.private_key = rsa.public_key.to_pem, rsa.to_pem
       @site.hashed_public_key=Digest::MD5.hexdigest(@site.public_key)
       @site.save
     end
-    
-    
+
+
   end
-  
+
   def update_site
     if Site.where(this_site: true).count==0
       @site=Site.new(params[:site])
       @site.this_site=true
-      @site.save         
+      @site.save
     else
       @site=Site.where(this_site: true).first
       @site.update_attributes params[:site]
@@ -34,7 +34,7 @@ class Admin::SiteController < ApplicationController
     Log.new(:from=>current_user, :action=>'changed site title: '+@site.site_name+', description: '+@site.site_description).save
     redirect_to admin_site_config_url
   end
-  
+
   def regenerate_keys
     @site=Site.where(this_site: true).first
     @site.regernate_keys
@@ -44,5 +44,5 @@ class Admin::SiteController < ApplicationController
       format.js {render :layout=>false}
     end
   end
-  
+
 end

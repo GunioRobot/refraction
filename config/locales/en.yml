@@ -4,9 +4,9 @@
 en:
   tweet_saved: 'Tweet successfully saved'
   Deleted successfully: 'Deleted successfully'
-  re-generate key pairs: 'Re-generate key pairs'  
+  re-generate key pairs: 'Re-generate key pairs'
   updated successfully: 'updated successfully'
-  
+
   layouts:
     application:
       logout: 'Logout'
@@ -34,7 +34,7 @@ en:
   errors:
     403:
       Return: 'Return'
-      
+
   admin:
     circles:
       index:
@@ -88,5 +88,5 @@ en:
         all: 'All sites'
         sites who've added you: "Sites who've added you"
         sites and you added each other: 'Sites and you added each other'
-        
-        
+
+

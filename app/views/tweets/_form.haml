@@ -2,7 +2,7 @@
   - if !f.object.errors.blank?
     = render :partial => 'share/error_messages', :locals => {:object => f.object}
   .clearfix
-    
-    =f.text_area(:content, :size => "70x6", :class=>'xxlarge') 
+
+    =f.text_area(:content, :size => "70x6", :class=>'xxlarge')
     %br
   = f.submit t('.submit'),:class=>'btn'

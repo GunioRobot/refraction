@@ -2,10 +2,10 @@ class Admin::TweetsController < ApplicationController
   before_filter :admin_needed
 
   def index
-    @tweets=Tweet.all.order_by([:created_at, :desc]) 
+    @tweets=Tweet.all.order_by([:created_at, :desc])
     @count=Tweet.count
   end
-  
+
 
   def destroy
     @tweet=Tweet.find(params[:id])

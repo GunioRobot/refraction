@@ -1,9 +1,9 @@
 class Admin::CommentsController < ApplicationController
   before_filter :admin_needed
-  
+
   def index
-    @comments=Comment.all.order_by([:created_at, :desc]) 
-    @count=Comment.count    
+    @comments=Comment.all.order_by([:created_at, :desc])
+    @count=Comment.count
   end
 
   def destroy

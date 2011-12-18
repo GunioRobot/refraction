@@ -6,7 +6,7 @@
 -@tweets.each do |t|
   .admin_stweet
     =t.content
-    %br    
+    %br
     -if t.user
       =link_to t.user.name, admin_user_url(t.user)
     -else

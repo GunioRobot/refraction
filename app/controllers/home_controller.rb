@@ -5,6 +5,6 @@ class HomeController < ApplicationController
     @tweets=Tweet.all.desc(:created_at)
     #@r_tweets=Tweet.get_all_stores
   end
-  
+
 
 end

@@ -4,7 +4,7 @@ class Tweet
   include Mongoid::Document
   include Mongoid::Timestamps
   include HTTParty
-  
+
   field :content
   field :title
   field :closed, :type=>Boolean, :default=>false
@@ -12,19 +12,19 @@ class Tweet
   field :id_in_sender
   field :circle, :type=>Array
 
-  
+
   belongs_to :user
   belongs_to :site
   references_many :comments
   has_one :retweet, :class_name=>'Tweet'
 
   validates_presence_of :content
-  
+
   attr_accessible :content
 
   before_destroy :delete_comments
   before_save :before_save
-  
+
   def before_save
     if(self.site_id) #if this is from other site
       hash=Digest::MD5.hexdigest(self.content) #content=id+content
@@ -51,7 +51,7 @@ class Tweet
   def open!
     self.close=false
   end
-  
+
   def delete_comments
     self.comments.destroy
   end
@@ -61,5 +61,5 @@ class Tweet
   def self.get_all_stores
     get("http://0.0.0.0:3000/tweets.xml")
   end
-  
+
 end

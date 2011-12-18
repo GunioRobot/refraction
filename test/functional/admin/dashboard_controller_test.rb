@@ -6,8 +6,8 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     @other_user=Factory :user
     @admin_user=Factory :user
     @admin_user.add_roles!('admin')
-  end  
-  
+  end
+
   test "others cann't access" do
     #get :show
     #assert_response 403
@@ -15,11 +15,11 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     get :show
     assert_response 403
   end
-  
+
   test "admin can access" do
     sign_in @admin_user
     get :show
     assert_response 200
   end
-  
+
 end
